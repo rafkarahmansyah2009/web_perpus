@@ -1,0 +1,121 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --color-dark-bg: #0d1117;
+    --color-dark-surface: #161b22;
+    --color-dark-border: #30363d;
+    --color-primary: #3b82f6;
+    --color-secondary: #8b5cf6;
+    --color-text-main: #e6edf3;
+    --color-text-muted: #8b949e;
+    --color-success: #238636;
+    --color-danger: #da3633;
+    --color-gold: #e3b341;
+}
+
+@layer base {
+    body {
+        background-color: #0d1117;
+        color: #e6edf3;
+        font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Space Grotesk', sans-serif;
+    }
+}
+
+@layer components {
+    .btn-gradient {
+        @apply bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold py-2.5 px-6 rounded-xl hover:from-blue-600 hover:to-violet-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/25;
+    }
+
+    .btn-gradient-sm {
+        @apply bg-gradient-to-r from-blue-500 to-violet-500 text-white font-medium py-1.5 px-4 rounded-lg hover:from-blue-600 hover:to-violet-600 transition-all duration-300 text-sm;
+    }
+
+    .card-dark {
+        @apply bg-[#161b22] border border-[#30363d] rounded-2xl;
+    }
+
+    .input-dark {
+        @apply w-full bg-[#0d1117] border border-[#30363d] text-[#e6edf3] rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300 placeholder-[#8b949e];
+    }
+
+    .badge-pill {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+    }
+
+    .table-dark {
+        @apply w-full text-left text-sm;
+    }
+
+    .table-dark thead th {
+        @apply px-4 py-3 text-[#8b949e] font-medium border-b border-[#30363d] text-xs uppercase tracking-wider;
+    }
+
+    .table-dark tbody td {
+        @apply px-4 py-3 border-b border-[#30363d]/50;
+    }
+
+    .table-dark tbody tr {
+        @apply hover:bg-[#1c2128] transition-colors duration-200;
+    }
+
+    .sidebar-link {
+        @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#8b949e] hover:text-[#e6edf3] hover:bg-[#1c2128] transition-all duration-200;
+    }
+
+    .sidebar-link.active {
+        @apply text-blue-400 bg-blue-500/10 border-l-2 border-blue-500;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0d1117; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100px); }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out forwards;
+}
+
+.animate-slide-out-right {
+    animation: slideOutRight 0.3s ease-out forwards;
+}
+
+/* Pagination dark styling */
+nav[role="navigation"] .relative {
+    @apply inline-flex items-center;
+}
+
+nav[role="navigation"] span[aria-current="page"] span {
+    @apply bg-blue-500 text-white border-blue-500;
+}
