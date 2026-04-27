@@ -18,14 +18,20 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'no_telp' => 'nullable|string|max:20',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'password' => 'nullable|string|min:6|confirmed',
-        ]);
+        ];
+
+        if ($request->filled('password')) {
+            $rules['password'] = 'string|min:6|confirmed';
+        }
+
+        $request->validate($rules);
 
         $user->name = $request->name;
         $user->no_telp = $request->no_telp;

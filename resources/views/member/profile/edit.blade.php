@@ -27,13 +27,13 @@
 
             <div>
                 <label class="block text-sm text-[#8b949e] mb-2">Nama</label>
-                <input type="text" name="name" value="{{ old('name', $user->name) }}" required class="input-dark">
+                <input type="text" name="name" value="{{ old('name', $user->name) }}" autocomplete="off" required class="input-dark">
                 @error('name')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
                 <label class="block text-sm text-[#8b949e] mb-2">No. Telepon</label>
-                <input type="text" name="no_telp" value="{{ old('no_telp', $user->no_telp) }}" class="input-dark">
+                <input type="text" name="no_telp" value="{{ old('no_telp', $user->no_telp) }}" autocomplete="off" class="input-dark">
             </div>
 
             <div>
@@ -47,13 +47,13 @@
 
             <div>
                 <label class="block text-sm text-[#8b949e] mb-2">Password Baru</label>
-                <input type="password" name="password" class="input-dark" placeholder="Kosongkan jika tidak ingin mengubah">
+                <input type="password" name="password" autocomplete="new-password" class="input-dark" placeholder="Kosongkan jika tidak ingin mengubah">
                 @error('password')<p class="text-red-400 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
                 <label class="block text-sm text-[#8b949e] mb-2">Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" class="input-dark">
+                <input type="password" name="password_confirmation" autocomplete="new-password" class="input-dark">
             </div>
         </div>
 

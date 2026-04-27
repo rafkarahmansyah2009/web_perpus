@@ -57,11 +57,11 @@
                     <p class="text-xs text-blue-400 font-mono mt-1">{{ $user->nis ?? $user->nip ?? 'ID: '.$user->id }}</p>
                 </div>
             </div>
-            {{-- QR Code placeholder --}}
+            {{-- QR Code --}}
             <div class="flex items-center justify-center p-4 bg-white rounded-xl">
                 <div class="text-center">
-                    <div class="w-24 h-24 bg-[#0d1117] rounded-lg flex items-center justify-center mx-auto mb-2">
-                        <span class="text-white text-xs font-mono">QR-{{ str_pad($user->id, 5, '0', STR_PAD_LEFT) }}</span>
+                    <div class="w-24 h-24 bg-white flex items-center justify-center mx-auto mb-2">
+                        {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(96)->margin(0)->generate('QR-' . str_pad($user->id, 5, '0', STR_PAD_LEFT)) !!}
                     </div>
                     <p class="text-[#0d1117] text-xs font-medium">SMKN 5 Tangerang</p>
                 </div>
