@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\CatalogController;
 use App\Http\Controllers\Public\AnnouncementController;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 // Auth
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Public

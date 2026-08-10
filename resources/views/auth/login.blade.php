@@ -65,6 +65,12 @@
                     Masuk
                 </button>
             </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-[#8b949e] text-sm">
+                    Belum punya akun? <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">Daftar disini</a>
+                </p>
+            </div>
         </div>
 
         <p class="text-center text-[#8b949e] text-xs mt-6">&copy; {{ date('Y') }} Perpustakaan SMKN 5 Tangerang</p>
