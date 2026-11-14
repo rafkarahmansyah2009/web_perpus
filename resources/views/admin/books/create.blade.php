@@ -54,7 +54,10 @@
             </div>
             <div>
                 <label class="block text-sm text-[#8b949e] mb-2">Cover</label>
-                <input type="file" name="cover" accept="image/*" class="input-dark text-sm">
+                <div id="cover-preview-container" class="hidden mb-3">
+                    <img id="cover-preview" src="#" alt="Preview Cover" class="w-24 h-36 object-cover rounded-xl border border-[#30363d] shadow-md">
+                </div>
+                <input type="file" name="cover" id="cover-input" accept="image/*" class="input-dark text-sm file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-500/10 file:text-blue-400 hover:file:bg-blue-500/20">
             </div>
             <div>
                 <label class="block text-sm text-[#8b949e] mb-2">Deskripsi</label>
@@ -68,3 +71,25 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    const coverInput = document.getElementById('cover-input');
+    const previewContainer = document.getElementById('cover-preview-container');
+    const previewImg = document.getElementById('cover-preview');
+
+    if (coverInput) {
+        coverInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImg.src = event.target.result;
+                    previewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+</script>
+@endpush

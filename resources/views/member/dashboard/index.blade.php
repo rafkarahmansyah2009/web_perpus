@@ -39,31 +39,43 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
     {{-- Member Card --}}
-    <div class="card-dark p-6 relative overflow-hidden">
+    <div class="card-dark p-6 relative overflow-hidden flex flex-col justify-between">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-violet-500/5"></div>
         <div class="relative">
-            <h3 class="text-sm text-[#8b949e] mb-4 font-medium">Kartu Anggota Digital</h3>
-            <div class="flex items-center gap-4 mb-4">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm text-[#8b949e] font-medium">Kartu Anggota Digital</h3>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5"></span>
+                    Aktif
+                </span>
+            </div>
+            <div class="flex items-center gap-4 mb-5">
                 @if($user->foto)
-                    <img src="{{ asset('storage/' . $user->foto) }}" class="w-16 h-16 rounded-2xl object-cover border-2 border-[#30363d]">
+                    <img src="{{ asset('storage/' . $user->foto) }}" class="w-16 h-16 rounded-2xl object-cover border-2 border-[#30363d] shadow-md">
                 @else
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-md shadow-blue-500/20">
                         {{ strtoupper(substr($user->name, 0, 1)) }}
                     </div>
                 @endif
-                <div>
-                    <h4 class="font-bold font-['Space_Grotesk']">{{ $user->name }}</h4>
-                    <p class="text-xs text-[#8b949e]">{{ ucfirst($user->role) }} — {{ $user->kelas ?? '-' }}</p>
-                    <p class="text-xs text-blue-400 font-mono mt-1">{{ $user->nis ?? $user->nip ?? 'ID: '.$user->id }}</p>
+                <div class="min-w-0">
+                    <h4 class="font-bold font-['Space_Grotesk'] text-white text-base truncate">{{ $user->name }}</h4>
+                    <p class="text-xs text-[#8b949e] mt-0.5">{{ ucfirst($user->role) }} — {{ $user->kelas ?? 'Civitas Sekolah' }}</p>
+                    <p class="text-xs text-blue-400 font-mono mt-1">{{ $user->nis ? 'NIS: '.$user->nis : ($user->nip ? 'NIP: '.$user->nip : 'ID: '.str_pad($user->id, 5, '0', STR_PAD_LEFT)) }}</p>
                 </div>
             </div>
-            {{-- QR Code --}}
-            <div class="flex items-center justify-center p-4 bg-white rounded-xl">
-                <div class="text-center">
-                    <div class="w-24 h-24 bg-white flex items-center justify-center mx-auto mb-2">
-                        {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(96)->margin(0)->generate('QR-' . str_pad($user->id, 5, '0', STR_PAD_LEFT)) !!}
-                    </div>
-                    <p class="text-[#0d1117] text-xs font-medium">SMKN 5 Tangerang</p>
+
+            <div class="space-y-2.5 pt-4 border-t border-[#30363d] text-xs">
+                <div class="flex items-center justify-between">
+                    <span class="text-[#8b949e]">Email</span>
+                    <span class="text-[#c9d1d9] font-medium truncate max-w-[170px]">{{ $user->email }}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-[#8b949e]">No. Telepon</span>
+                    <span class="text-[#c9d1d9] font-medium">{{ $user->no_telp ?? '-' }}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-[#8b949e]">Institusi</span>
+                    <span class="text-blue-400 font-medium">SMKN 5 Tangerang</span>
                 </div>
             </div>
         </div>

@@ -64,8 +64,8 @@ class ReportController extends Controller
         foreach ($loans as $i => $loan) {
             $csvContent .= implode(',', [
                 $i + 1,
-                '"' . $loan->user->name . '"',
-                '"' . $loan->book->judul . '"',
+                '"' . str_replace('"', '""', $loan->user?->name ?? 'User Terhapus') . '"',
+                '"' . str_replace('"', '""', $loan->book?->judul ?? 'Buku Terhapus') . '"',
                 $loan->tgl_pinjam?->format('d/m/Y') ?? '-',
                 $loan->tgl_kembali_rencana?->format('d/m/Y') ?? '-',
                 $loan->tgl_kembali_aktual?->format('d/m/Y') ?? '-',

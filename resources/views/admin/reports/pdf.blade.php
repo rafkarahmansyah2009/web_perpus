@@ -35,8 +35,8 @@
             @foreach($loans as $i => $loan)
             <tr>
                 <td>{{ $i + 1 }}</td>
-                <td>{{ $loan->user->name }}</td>
-                <td>{{ $loan->book->judul }}</td>
+                <td>{{ $loan->user?->name ?? 'User Terhapus' }}</td>
+                <td>{{ $loan->book?->judul ?? 'Buku Terhapus' }}</td>
                 <td>{{ $loan->tgl_pinjam?->format('d/m/Y') }}</td>
                 <td>{{ $loan->tgl_kembali_rencana?->format('d/m/Y') }}</td>
                 <td>{{ $loan->tgl_kembali_aktual?->format('d/m/Y') ?? '-' }}</td>

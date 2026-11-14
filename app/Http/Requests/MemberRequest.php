@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MemberRequest extends FormRequest
 {
@@ -13,11 +15,12 @@ class MemberRequest extends FormRequest
 
     public function rules(): array
     {
-        $userId = $this->route('anggotum') ?? $this->route('anggota');
+        $user = $this->route('anggotum') ?? $this->route('anggota');
+        $userId = $user instanceof User ? $user->id : $user;
 
         $rules = [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $userId,
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($userId)],
             'role' => 'required|in:admin,guru,siswa',
             'nis' => 'nullable|string|max:20',
             'nip' => 'nullable|string|max:30',
